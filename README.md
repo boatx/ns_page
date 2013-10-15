@@ -1,2 +1,1 @@
-Strona Sołectwa Nowe Smolno
-Korzysta z frameworku CodeIgniter
+Strona Sołectwa Nowe Smolno korzystająca z frameworku CodeIgniter i jQuery
