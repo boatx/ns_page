@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.2.3/~lodka/ci';
+//$config['base_url']	= 'http://localhost/~lodka/ci';
+$config['base_url']	= 'http://192.168.0.100/~lodka/ci';
 
 /*
 |--------------------------------------------------------------------------

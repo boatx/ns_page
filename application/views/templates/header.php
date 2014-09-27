@@ -29,8 +29,8 @@
                 <li><a href="#">C++</a></li>
             </ul>
             </li>
-            <li><a href="#">Galeria</a></li>
-            <li class="goright"><a>></a><li>
+            <li><a href=<?php echo base_url() . "index.php/gallery" ?>>Galeria</a></li>
+            <li class="goright"><a>></a></li>
         </ul>
         </nav>
     </div>

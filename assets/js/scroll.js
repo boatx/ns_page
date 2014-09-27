@@ -19,121 +19,148 @@ $(document).ready(function(){
     });
     var a = [];
     var ind = 0;
+    var last_ind = 0;
 
-    var hide = function(start,stop)
-            {
-                for(var i=start;i<stop;i++)
-                {
-                    $("ul:first").children().eq(i).css("display","none");
-                }
-            }
-
-    var show = function(start,stop)
-            {
-                for(var i=start;i<stop;i++)
-                {
-                    $("ul:first").children().eq(i).css("display","inline-table");
-                }
-            }
+    var show_hide = function(tmp, val)
+    {
+        for(var i in tmp)
+        {
+            $("ul:first").children().eq(tmp[i]).css("display",val);
+        }
+    }
 
     var set_menu = function()
+    {
+        var a=[];
+        var width;
+        var tmp = [];
+        var tmp_width = [];
+        var full_width = 0;
+        var arrow_width = $(".goright").width();
+        var max_width = $("nav").width();
+
+        $("ul:first").children().each(function(){
+            if (!$(this).hasClass('goleft') && !$(this).hasClass('goright'))
+            {
+                tmp_width.push($(this).width());
+                tmp.push($(this).index());
+                full_width += $(this).width();
+            }
+        });
+
+        if (full_width < max_width)
+        {
+            a.push(tmp);
+        }
+        else
+        {
+            var last_array = [];
+            var width = arrow_width + tmp_width[0];
+            do
+            {
+                tmp_width.shift();
+                last_array.push(tmp.shift());
+                width += tmp_width[0];
+            } while (width < max_width && tmp.length > 0)
+            a.push(last_array);
+
+            last_array = [];
+            width = arrow_width + tmp_width[tmp_width.length - 1];
+            do
+            {
+                tmp_width.pop();
+                last_array.push(tmp.pop());
+                width += tmp_width[tmp_width.length-1];
+            } while (width < max_width && tmp.length > 0)
+
+            var in_array = [];
+            while(tmp.length > 0)
+            {
+                width = 2*arrow_width + tmp_width[0];
+                do
                 {
-                    var a=[];
-                    var last = 0;
-                    a.push(0);
-                    var arrow_width = 2*$(".goright").width();
-                    var full_width = arrow_width;
-                    var max_width = $("nav").width();
+                    tmp_width.shift();
+                    in_array.push(tmp.shift());
+                    width += tmp_width[0];
+                } while (width < max_width && tmp.length > 0)
+                a.push(in_array);
+                in_array = [];
+            }
 
-                    $("ul:first").children().each(function(){
-                        if (!$(this).hasClass("goleft") && !$(this).hasClass("goright"))
-                        {
-                            full_width = full_width + $(this).width();
-                            last = $(this).index();
-                            if (full_width > max_width)
-                            {
-                                a.push($(this).index());
-                                full_width = $(this).width()+arrow_width;
-                            }
-                        }
-                    });
-                    a.push(last+1);
-                    return a;
-                }
+            a.push(last_array);
+        }
 
+        return a;
+    }
 
     var slide_menu = function()
-                        {
-                            hide(a[0],a[a.length-1]);
-                            show(a[ind],a[ind+1]);
+    {
+        show_hide(a[ind], 'inline-table');
+        show_hide(a[last_ind], 'none');
+        toggleLeftRight();
+    }
 
-                            if (ind > 0)
-                            {
-                                $(".goleft").css("display","inline-table");
-                            }
-                            else
-                            {
-                                $(".goleft").css("display","none");
-                            }
+    var toggleLeftRight = function()
+    {
+        if (ind > 0)
+        {
+            $(".goleft").css("display","inline-table");
+        }
+        else
+        {
+            $(".goleft").css("display","none");
+        }
 
-                            if (a[ind+2])
-                            {
-                                $(".goright").css("display","inline-table");
-                            }
-                            else
-                            {
-                                $(".goright").css("display","none");
-                            }
-                        }
+        if (a[ind+1])
+        {
+            $(".goright").css("display","inline-table");
+        }
+        else
+        {
+            $(".goright").css("display","none");
+        }
+    }
 
+    var doneResizing = function()
+    {
+        a = set_menu();
+        if (a.length - 1 < ind)
+        {
+            ind = a.length - 1
+        }
+        for (var i = 0; i < a.length; i++)
+        {
+            //console.log(a[i].toString());
+            if (i != ind)
+            {
+                show_hide(a[i], 'none');
+            }
+            else
+            {
+                show_hide(a[i], 'inline-table');
+            }
+        }
 
+        toggleLeftRight();
+    }
+
+    var id;
+    $(window).resize(function()
+    {
+        //make sure to call only once
+        clearTimeout(id);
+        id = setTimeout(doneResizing,500);
+    });
     $(".goright").click(function(){
+        last_ind = ind;
         ind = ind+1;
         slide_menu();
     });
 
     $(".goleft").click(function(){
+        last_ind = ind;
         ind = ind-1;
         slide_menu();
     });
 
-    var id;
-
-    $(window).resize(function(){
-        //make sure to call only once
-        clearTimeout(id);
-        id = setTimeout(doneResizing,500);
-    });
-
-    function doneResizing(){
-        a = set_menu();
-        if (ind > a.length-2)
-        {
-            ind = a.length-2;
-        }
-        slide_menu();
-    }
-
-
-/*
-var o1 = $("nav").offset();
-var o1w = $("nav").width();
-var o1h = $("nav").height();
-
-//check wich element is overflow
-$("ul:first").children().each(function(){
-    var o2 = $(this).offset();
-    var o2w = $(this).width();
-    var o2h = $(this).height();
-
-    if (o2.top + o2h > o1.top + o1h || o2.left + o2w > o1.left + o1w)
-    {
-        if ($this.css("display") !== "none")
-        {
-            $(this).css("display",none);
-        }
-        alert($(this).text());
-    }
-});
-*/
 });

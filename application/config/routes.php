@@ -37,6 +37,14 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$route['gallery/manage'] = 'gallery/manage_gallery';
+$route['gallery/manage/create_subgallery'] = 'gallery/create_subgallery';
+$route['gallery/manage/upload_image'] = 'gallery/upload_image';
+$route['gallery/manage/rm/(:any)'] = 'gallery/rm_subgallery/$1';
+$route['gallery/manage/rm/(:any)/(:any)'] = 'gallery/rm_image/$1/$2';
+$route['gallery/manage/(:any)'] = 'gallery/manage_subgallery/$1';
+$route['gallery'] = 'gallery';
+$route['gallery/(:any)'] = 'gallery/subgallery/$1';
 $route['news'] = 'news';
 $route['news/view/(:any)'] = 'news/view/$1';
 $route['news/(:num)'] = 'news/view/$1';

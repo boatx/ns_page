@@ -26,3 +26,18 @@
     float:left;
 }
 
+.date
+{
+    display:block;
+}
+
+.news
+{
+    margin: 0;
+}
+
+.date_inline
+{
+    display:none;
+}
+

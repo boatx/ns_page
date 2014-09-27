@@ -6,7 +6,8 @@
 <div id="main">
     <div id="content" class="text">
         <h2>Manage Gallery</h2>
-        <?php var_dump($maps) ?>
+        <?php var_dump($error) ?>
+        <?php echo validation_errors(); ?>
         <?php echo form_open_multipart('gallery/manage/upload_image'); ?>
             <h5>Dodaj Obraz do Galleri</h5>
             <input type="hidden" name="gallery_name" value=<?php echo $name?> />

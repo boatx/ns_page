@@ -4,7 +4,7 @@ if ( ! function_exists('pagination_helper'))
 {
     function pagination_helper($pagenum,$pagemax,$url,$num=3)
     {
-        var $n = 8;
+        $n = 8;
 
         if ($pagenum >= 1 && $pagenum <= $pagemax)
         {
@@ -39,7 +39,7 @@ if ( ! function_exists('pagination_helper'))
                 }
                 else
                 {
-                    var $x=$n/2;
+                    $x = $n/2;
                     echo "<a href=" . $url .  "1 >" . 1 . "</a>";
                     echo " ... ";
                     for ($i=$x;$i<=$x;$i++)
@@ -47,8 +47,8 @@ if ( ! function_exists('pagination_helper'))
                         echo "<a href=" . $url . $pagenum - $i . ">" . $pagenum - $i . "</a>";
 
                     }
-                    echo " ... "
-                    echo "<a href=" . $url . $pagemax . ">" . $pagemax  . "</a>";
+                    echo " ... ";
+                    echo "<a href=" . $url . $pagemax . ">" . $pagemax  . "</a>" ;
                 }
             }
 

@@ -176,8 +176,6 @@ nav ul ul li a:hover{
     display:none;
 }
 
-
-
 #slider div input[type="radio"] + label {
     color:#f2f2f2;
     font-family:Arial, sans-serif;
@@ -261,7 +259,7 @@ footer{
     clear:left;
 }
 
-
+/*
 section
 {
 	width:85%;
@@ -281,19 +279,30 @@ article
   margin:0;
   padding:0;
 }
+*/
 
 .news
 {
     width: 90%;
     overflow:hidden;
+    margin: auto;
 }
 
 .date
 {
+    display:none;
     float:left;
     width:10%;
     text-shadow: 0px 2px 2px #000;
 
+}
+
+.date_inline
+{
+    margin: 0;
+    display:block-inline;
+    font-style: italic;
+	font-family: Tahoma, Arial, Helvetica, Sans-serif;
 }
 
 .date_in
@@ -350,4 +359,3 @@ article
     font-style:italic;
     font-family:Serif;
 }
-
