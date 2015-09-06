@@ -10,7 +10,6 @@ $( document ).ready(function() {
         {
             act=(act+1) % size;
         }
-        //imgArray[act].show();
         imgArray[act].css('z-index',1);
         imgArray[pre].css('z-index',0);
         imgArray[act].fadeIn(time,'swing',function(){
@@ -18,7 +17,7 @@ $( document ).ready(function() {
             imgArray[act].css('display','block');
         });
         radArray[act].prop('checked',true);
-    }
+    };
 
     var conDiv = jQuery('<div/>', {id: 'control'});
     var imgArray=[];
@@ -27,7 +26,7 @@ $( document ).ready(function() {
     $('#slider').children('div').each(function(){
         imgArray.push($(this));
         radArray.push(jQuery('<input/>',{type:'radio',name:'control',value:i,id:"a"+i}));
-        radArray[i].change(function(){changeImg(1000,this.value)});
+        radArray[i].change(function(){changeImg(1000,this.value);});
         conDiv.append(radArray[i]);
         conDiv.append('<label for="a'+i+'"><span></span></label>');
         i=i+1;

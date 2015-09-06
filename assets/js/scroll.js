@@ -27,7 +27,7 @@ $(document).ready(function(){
         {
             $("ul:first").children().eq(tmp[i]).css("display",val);
         }
-    }
+    };
 
     var set_menu = function()
     {
@@ -61,7 +61,7 @@ $(document).ready(function(){
                 tmp_width.shift();
                 last_array.push(tmp.shift());
                 width += tmp_width[0];
-            } while (width < max_width && tmp.length > 0)
+            } while (width < max_width && tmp.length > 0);
             a.push(last_array);
 
             last_array = [];
@@ -71,7 +71,7 @@ $(document).ready(function(){
                 tmp_width.pop();
                 last_array.push(tmp.pop());
                 width += tmp_width[tmp_width.length-1];
-            } while (width < max_width && tmp.length > 0)
+            } while (width < max_width && tmp.length > 0);
 
             var in_array = [];
             while(tmp.length > 0)
@@ -82,7 +82,7 @@ $(document).ready(function(){
                     tmp_width.shift();
                     in_array.push(tmp.shift());
                     width += tmp_width[0];
-                } while (width < max_width && tmp.length > 0)
+                } while (width < max_width && tmp.length > 0);
                 a.push(in_array);
                 in_array = [];
             }
@@ -91,14 +91,14 @@ $(document).ready(function(){
         }
 
         return a;
-    }
+    };
 
     var slide_menu = function()
     {
         show_hide(a[ind], 'inline-table');
         show_hide(a[last_ind], 'none');
         toggleLeftRight();
-    }
+    };
 
     var toggleLeftRight = function()
     {
@@ -119,14 +119,14 @@ $(document).ready(function(){
         {
             $(".goright").css("display","none");
         }
-    }
+    };
 
     var doneResizing = function()
     {
         a = set_menu();
         if (a.length - 1 < ind)
         {
-            ind = a.length - 1
+            ind = a.length - 1;
         }
         for (var i = 0; i < a.length; i++)
         {
@@ -142,7 +142,7 @@ $(document).ready(function(){
         }
 
         toggleLeftRight();
-    }
+    };
 
     var id;
     $(window).resize(function()
